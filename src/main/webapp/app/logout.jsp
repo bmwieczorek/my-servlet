@@ -22,7 +22,7 @@
     </c:when>
 
     <c:when test="${param.reason == 3}">
-        <c:out value="Unathorized access, you have been logged out."/>
+        <c:out value="Unauthorized access, you have been logged out."/>
     </c:when>
 
     <c:otherwise>You have successfully logged out</c:otherwise>

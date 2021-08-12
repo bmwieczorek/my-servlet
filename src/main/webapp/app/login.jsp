@@ -1,34 +1,52 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.UUID" %>
-<%@ page import="java.util.Arrays" %>
-<%@ page import="com.bawi.servlet.State" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<%@ page import="java.util.Base64" %>
+<%@ page import="java.util.UUID" %>
+
 <c:if test="${empty param.username || empty param.password}">
     <c:redirect url="logout.jsp?reason=1" />
 </c:if>
 
 <c:set scope="session" var="username" value="${param.username}" />
 <c:set scope="session" var="csrfToken" value="${UUID.randomUUID().toString()}" />
-<% session.setMaxInactiveInterval(180); %>
-<c:if test="${State.USER_PASSWORD_HASH.containsKey(param.username) &&
-    !Arrays.equals(State.USER_PASSWORD_HASH.get(param.username), State.createHash(param.username, param.password))}">
+
+<%@ include file="datasource.jsp"%>
+
+<% session.setMaxInactiveInterval(300); %>
+<%--<sql:query dataSource = "${dataSource}" var="result" sql="SELECT HASH FROM MY_SCHEMA.USER_HASH WHERE USERNAME = ?">--%>
+<%--<sql:query dataSource = "${dataSource}" var="result" sql="SELECT PASSWORD FROM MY_SCHEMA.USER_PASSWORD WHERE USERNAME = ?">--%>
+<sql:query dataSource = "${dataSource}" var="result" sql="SELECT PASSWORD FROM MY_SCHEMA.USER_PASSWORD_BASE64 WHERE USERNAME = ?">
+    <sql:param value="${param.username}" />
+</sql:query>
+<%--<c:out value="aaa=${result.rows[0].hash}"/>--%>
+<%--<c:if test="${State.USER_PASSWORD_HASH.containsKey(param.username) &&--%>
+<%--    !Arrays.equals(State.USER_PASSWORD_HASH.get(param.username), State.createHash(param.username, param.password))}">--%>
+
+<%--<c:if test="${!empty result.rows && !Arrays.equals(result.rows[0].hash, State.createHash(param.username, param.password))}">--%>
+<%--<c:if test="${!empty result.rows && !Arrays.equals(result.rows[0].password, param.password)}">--%>
+<c:out value="${Base64.getEncoder().encodeToString(param.password.getBytes())}" />
+<c:out value="${result.rows[0].password}" />
+<c:if test="${!empty result.rows && !(Base64.getEncoder().encodeToString(param.password.getBytes()) == result.rows[0].password)}">
     <c:redirect url="logout.jsp?reason=2" />
 </c:if>
-<c:if test="${!State.USER_PASSWORD_HASH.containsKey(param.username)}">
-    <%
-        String username = request.getParameter("username");
-        if (!State.USER_PASSWORD_HASH.containsKey(username)) {
-            State.USER_PASSWORD_HASH.put(username, State.createHash(username, request.getParameter("password")));
-        }
-    %>
-</c:if>
-<c:redirect url="reviews_post_redirect_get.jsp" />
 
-</body>
-</html>
+<%--<%--%>
+<%--    String username = request.getParameter("username");--%>
+<%--    if (!State.USER_PASSWORD_HASH.containsKey(username)) {--%>
+<%--        State.USER_PASSWORD_HASH.put(username, State.createHash(username, request.getParameter("password")));--%>
+<%--    }--%>
+<%--%>--%>
+
+<c:if test="${empty result.rows}">
+<%--    <sql:update dataSource="${dataSource}" sql="INSERT INTO MY_SCHEMA.USER_HASH (username,hash) VALUES (?,?)">--%>
+<%--    <sql:update dataSource="${dataSource}" sql="INSERT INTO MY_SCHEMA.USER_PASSWORD (USERNAME,PASSWORD) VALUES (?,?)">--%>
+    <sql:update dataSource="${dataSource}" sql="INSERT INTO MY_SCHEMA.USER_PASSWORD_BASE64 (USERNAME,PASSWORD) VALUES (?,?)">
+        <sql:param value="${param.username}"/>
+<%--        <sql:param value="${State.createHash(param.username, param.password)}"/>--%>
+<%--        <sql:param value="${param.password}"/>--%>
+        <sql:param value="${Base64.getEncoder().encodeToString(param.password.getBytes())}"/>
+    </sql:update>
+</c:if>
+<%--<c:redirect url="reviews_post_redirect_get.jsp" />--%>
+<c:redirect url="reviews2.jsp" />

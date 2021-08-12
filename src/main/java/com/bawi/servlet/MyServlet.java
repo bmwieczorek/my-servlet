@@ -27,17 +27,21 @@ public class MyServlet extends HttpServlet {
             return;
         }
 
+        String url = req.getParameter("url");
+
         switch (action) {
             case "forward": {
                 System.out.println("forward");
                 ServletContext servletContext = getServletContext();
-                RequestDispatcher dispatcher = servletContext.getRequestDispatcher("/forwarded.jsp");
+                //RequestDispatcher dispatcher = servletContext.getRequestDispatcher("/forwarded.jsp");
+                RequestDispatcher dispatcher = servletContext.getRequestDispatcher(url);
                 dispatcher.forward(req, resp);
                 break;
             }
             case "redirect": {
                 System.out.println("redirect");
-                resp.sendRedirect(req.getContextPath() + "/redirected.jsp");
+                //resp.sendRedirect(req.getContextPath() + "/redirected.jsp");
+                resp.sendRedirect(url);
                 break;
             }
         }
