@@ -1,9 +1,9 @@
 #Start HSQLDB
-java11 && cd ~/dev/my-servlet && java -cp ~/Downloads/hsqldb-2.6.0/hsqldb/lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:hsqldb/mydatabases/mydb --dbname.0 mydb
+java11 && cd ~/dev/my-servlet && java -cp ~/dev/env/hsqldb-2.6.0/hsqldb/lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:hsqldb/mydatabases/mydb --dbname.0 mydb
 
 #Create tables
 java11
-java -jar  ~/Downloads/hsqldb-2.6.0/hsqldb/lib/sqltool.jar --inlineRc=url=jdbc:hsqldb:hsql://localhost/mydb,user=sa
+java -jar  ~/dev/env/hsqldb-2.6.0/hsqldb/lib/sqltool.jar --inlineRc=url=jdbc:hsqldb:hsql://localhost/mydb,user=sa
 Enter password for sa: <empty>
 
 
