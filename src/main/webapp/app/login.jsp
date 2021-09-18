@@ -48,5 +48,24 @@
         <sql:param value="${Base64.getEncoder().encodeToString(param.password.getBytes())}"/>
     </sql:update>
 </c:if>
+
+<%
+Cookie my_cookie = new Cookie("my_cookie", "my_cookie");
+response.addCookie(my_cookie);
+
+Cookie my_secure_cookie = new Cookie("my_secure_cookie", "my_secure_cookie");
+my_secure_cookie.setSecure(true);
+response.addCookie(my_secure_cookie);
+
+Cookie my_httponly_cookie = new Cookie("my_httponly_cookie", "my_httponly_cookie");
+my_httponly_cookie.setHttpOnly(true);
+response.addCookie(my_httponly_cookie);
+
+Cookie my_secure_httponly_cookie = new Cookie("my_secure_httponly_cookie", "my_secure_httponly_cookie");
+my_secure_httponly_cookie.setHttpOnly(true);
+my_secure_httponly_cookie.setSecure(true);
+response.addCookie(my_secure_httponly_cookie);
+%>
+
 <%--<c:redirect url="reviews_post_redirect_get.jsp" />--%>
 <c:redirect url="reviews2.jsp" />
