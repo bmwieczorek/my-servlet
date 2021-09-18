@@ -1,10 +1,11 @@
 #Start HSQLDB
-java11 && java -cp ~/Downloads/hsqldb-2.6.0/hsqldb/lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:/Users/me/dev/my-servlet/hsqldb/mydatabases/mydb --dbname.0 mydb
+java11 && cd ~/dev/my-servlet && java -cp ~/Downloads/hsqldb-2.6.0/hsqldb/lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:hsqldb/mydatabases/mydb --dbname.0 mydb
 
 #Create tables
 java11
 java -jar  ~/Downloads/hsqldb-2.6.0/hsqldb/lib/sqltool.jar --inlineRc=url=jdbc:hsqldb:hsql://localhost/mydb,user=sa
 Enter password for sa: <empty>
+
 
 CREATE SCHEMA MY_SCHEMA; create table MY_SCHEMA.USER_PASSWORD ( USERNAME VARCHAR(50) not null constraint USER_PASSWORD_PK primary key, PASSWORD VARCHAR(50) not null );
 create unique index MY_SCHEMA.USER_PASSWORD_USERNAME_UINDEX on MY_SCHEMA.USER_PASSWORD (USERNAME);
@@ -40,6 +41,8 @@ curl -d "username=guest&password=guest" -H "Content-Type: application/x-www-form
 
 
 curl -vv -L 'http://localhost:8080/do?action=redirect&url=http://example.com'
+curl -vv -L 'http://localhost:8080/do?action=redirect&url=http://example.com' -H 'Origin: http://google.com:8080' -H 'Referer: http://google.com:8080/app/login.html'
+
 
 
 
