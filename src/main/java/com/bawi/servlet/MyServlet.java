@@ -18,9 +18,14 @@ public class MyServlet extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(MyServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOGGER.info("Origin header: " + req.getHeader("Origin"));
+        LOGGER.info("Referer header: " + req.getHeader("Referer"));
+        LOGGER.info("origin header: " + req.getHeader("origin"));
+        LOGGER.info("referer header: " + req.getHeader("referer"));
+
         String action = req.getParameter("action");
         if (action == null) {
-            System.out.println("default");
+            LOGGER.info("default");
             resp.setContentType("text/plain;charset=UTF-8");
             ServletOutputStream out = resp.getOutputStream();
             out.print("Hello from MyServlet! - modified" +  new Date());
@@ -31,7 +36,7 @@ public class MyServlet extends HttpServlet {
 
         switch (action) {
             case "forward": {
-                System.out.println("forward");
+                LOGGER.info("forward");
                 ServletContext servletContext = getServletContext();
                 //RequestDispatcher dispatcher = servletContext.getRequestDispatcher("/forwarded.jsp");
                 RequestDispatcher dispatcher = servletContext.getRequestDispatcher(url);
