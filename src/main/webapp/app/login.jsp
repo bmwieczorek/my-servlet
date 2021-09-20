@@ -14,11 +14,18 @@
 <%@ include file="datasource.jsp"%>
 
 <% session.setMaxInactiveInterval(300); %>
-<%--<sql:query dataSource = "${dataSource}" var="result" sql="SELECT HASH FROM MY_SCHEMA.USER_HASH WHERE USERNAME = ?">--%>
-<%--<sql:query dataSource = "${dataSource}" var="result" sql="SELECT PASSWORD FROM MY_SCHEMA.USER_PASSWORD WHERE USERNAME = ?">--%>
-<sql:query dataSource = "${dataSource}" var="result" sql="SELECT PASSWORD FROM MY_SCHEMA.USER_PASSWORD_BASE64 WHERE USERNAME = ?">
-    <sql:param value="${param.username}" />
-</sql:query>
+
+<c:catch var ="catchException">
+    <%--<sql:query dataSource = "${dataSource}" var="result" sql="SELECT HASH FROM MY_SCHEMA.USER_HASH WHERE USERNAME = ?">--%>
+    <%--<sql:query dataSource = "${dataSource}" var="result" sql="SELECT PASSWORD FROM MY_SCHEMA.USER_PASSWORD WHERE USERNAME = ?">--%>
+    <sql:query dataSource = "${dataSource}" var="result" sql="SELECT PASSWORD FROM MY_SCHEMA.USER_PASSWORD_BASE64 WHERE USERNAME = ?">
+        <sql:param value="${param.username}" />
+    </sql:query>
+</c:catch>
+<c:if test = "${catchException != null}">
+    <c:redirect url="logout.jsp?reason=4" />
+</c:if>
+
 <%--<c:out value="aaa=${result.rows[0].hash}"/>--%>
 <%--<c:if test="${State.USER_PASSWORD_HASH.containsKey(param.username) &&--%>
 <%--    !Arrays.equals(State.USER_PASSWORD_HASH.get(param.username), State.createHash(param.username, param.password))}">--%>

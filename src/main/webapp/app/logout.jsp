@@ -25,6 +25,10 @@
         <c:out value="Unauthorized access, you have been logged out."/>
     </c:when>
 
+    <c:when test="${param.reason == 4}">
+        <c:out value="Oops, something went wrong. Try again later"/>
+    </c:when>
+
     <c:otherwise>You have successfully logged out</c:otherwise>
 </c:choose>
 <a href="login.html">Login again</a>
