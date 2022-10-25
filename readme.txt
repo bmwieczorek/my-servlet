@@ -1,3 +1,6 @@
+curl -L -b cookie.txt -c cookie.txt 'http://localhost:8080/app/login.jsp' --data-raw 'username=A&password=Aaaaaaa1'
+curl -vv 'http://localhost:8080/app/login.jsp' --data-raw 'username=A&password=Aaaaaaa1' >
+
 #Start HSQLDB
 java11 && cd ~/dev/my-servlet && java -cp ~/dev/env/hsqldb-2.6.0/hsqldb/lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:hsqldb/mydatabases/mydb --dbname.0 mydb
 
