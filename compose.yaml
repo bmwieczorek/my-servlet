@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - myNetwork
+  mydb:
+#    image: "mydb:latest"
+    build: ./db
+    ports:
+      - "9001:9001"
+    networks:
+      - myNetwork
+networks:
+  myNetwork:
+    driver: bridge

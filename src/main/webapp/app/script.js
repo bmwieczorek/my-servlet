@@ -1,1 +1,1 @@
-alert("you have been hacked!");
+alert("Hello, World!");

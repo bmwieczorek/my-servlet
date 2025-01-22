@@ -18,48 +18,14 @@ public class State {
         }
     }
 
-    public static class UserReview {
-        private String username;
-        private String review;
-
-        public UserReview(String username, String review) {
-            this.username = username;
-            this.review = review;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public String getReview() {
-            return review;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            UserReview that = (UserReview) o;
-            return Objects.equals(username, that.username) &&
-                    Objects.equals(review, that.review);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(username, review);
-        }
-    }
-
     public static final Map<String, Profile> LOGIN_PROFILE = new HashMap<>();
     public static final LinkedList<String> REVIEWS = new LinkedList<>();
-    public static final List<UserReview> USER_REVIEWS = new LinkedList<>();
 
-    public static final Map<String, byte[]> USER_PASSWORD_HASH = new HashMap<>();
 
-    public static byte[] createHash(String username, String password) {
+    public static byte[] createHashWithSalt(String password, String salt) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(username.getBytes(StandardCharsets.UTF_8)); // salt
+            md.update(salt.getBytes(StandardCharsets.UTF_8)); // salt
             return md.digest(password.getBytes(StandardCharsets.UTF_8));
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);

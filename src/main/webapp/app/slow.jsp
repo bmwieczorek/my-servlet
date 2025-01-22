@@ -2,11 +2,10 @@
   String name = request.getParameter("name");
   PrintWriter writer = response.getWriter();
   writer.write("hello: " + name );
-  writer.flush();
   try {
-    Thread.sleep(2000);
+    Thread.sleep(3000);
   } catch (InterruptedException e) {
-    e.printStackTrace();
+    System.out.println(e.getMessage());
   }
   writer.flush();
   writer.close();
@@ -14,5 +13,6 @@
 //  outputStream.write("abc".getBytes());
 //  outputStream.flush();
 //  outputStream.close();
-
 %>
+
+<%--http://localhost:8080/app/slow.jsp?name=abc--%>

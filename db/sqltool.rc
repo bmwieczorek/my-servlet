@@ -1,0 +1,6 @@
+# sqltool.rc
+
+urlid mydb
+url jdbc:hsqldb:hsql://localhost/mydb
+username sa
+password
